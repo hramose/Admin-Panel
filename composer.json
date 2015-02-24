@@ -13,6 +13,6 @@
     }
   },
   "require": {
-    "zizaco/entrust": "dev-laravel-5@dev"
+    "zizaco/entrust": "dev-laravel-5"
   }
 }
