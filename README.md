@@ -4,24 +4,21 @@
 
 Composer:
 
-```
-#!json
+```json
 
 "cinject/admin-panel": "dev-master"
 ```
 
 Provider:
 
-```
-#!php
+```PHP
 
 'Cinject\AdminPanel\Providers\AdminPanelServiceProvider',
 ```
 
 Publish resource:
 
-```
-#!bash
+```bash
 php artisan vendor:publish --provider='Cinject\AdminPanel\Providers\AdminPanelServiceProvider'
 ```
 
