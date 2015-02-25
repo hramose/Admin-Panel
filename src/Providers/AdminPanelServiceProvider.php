@@ -16,31 +16,46 @@ class AdminPanelServiceProvider extends ServiceProvider
 {
 
     protected $namespace = 'Cinject\AdminPanel\Controllers';
+
     protected $routeMiddleware = [
-        'adminPanel.auth' => 'Cinject\AdminPanel\Middleware\Authenticate',
-        'adminPanel.guest' => 'Cinject\AdminPanel\Middleware\RedirectIfAuthenticated',
+        'ap.auth' => 'Cinject\AdminPanel\Middleware\Authenticate',
+        'ap.guest' => 'Cinject\AdminPanel\Middleware\RedirectIfAuthenticated',
+        'ap.permission' => 'Cinject\AdminPanel\Middleware\Permission',
     ];
 
 
     public function boot(Router $router)
     {
+        $this->setRootControllerNamespace();
+
         foreach ($this->routeMiddleware as $key => $middleware) {
             $router->middleware($key, $middleware);
         }
 
-        $router->group(['namespace' => $this->namespace, 'prefix' => 'admin'], function ($router) {
-            require __DIR__ . '/../routes.php';
+        $router->group(['namespace' => $this->namespace, 'prefix' => config('adminPanel.routePrefix')], function ($router) {
+            $router->controller('auth', 'Auth\AuthController');
+
+            $router->group(['middleware' => 'ap.permission', 'permission' => 'ap'], function () {
+                require __DIR__ . '/../routes.php';
+            });
         });
 
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'adminPanel');
 
-//        $this->publishes([
-//            __DIR__ . '/../../resources/views' => base_path('resources/views/vendor/adminPanel'),
-//        ]);
+        $this->publishes([
+            __DIR__ . '/../../config/config.php' => config_path('adminPanel.php'),
+        ], 'config');
 
         $this->publishes([
-            __DIR__.'/../../resources/assets' => base_path('resources/adminAssets')
+            __DIR__ . '/../../resources/assets' => base_path('resources/adminAssets')
         ], 'assets');
+    }
+
+    public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__ . '/../../config/config.php', 'adminPanel'
+        );
     }
 }
