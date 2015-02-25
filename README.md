@@ -22,4 +22,4 @@ Publish resource:
 php artisan vendor:publish --provider='Cinject\AdminPanel\Providers\AdminPanelServiceProvider'
 ```
 
-tags: assets, config
+***tags:*** assets, config
