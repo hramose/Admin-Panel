@@ -9,11 +9,18 @@ Composer:
 "cinject/admin-panel": "dev-master"
 ```
 
-Provider:
+Providers:
 
 ```PHP
 
+'Zizaco\Entrust\EntrustServiceProvider',
 'Cinject\AdminPanel\Providers\AdminPanelServiceProvider',
+```
+
+Aliases:
+
+```PHP
+'Entrust'  =>  'Zizaco\Entrust\EntrustFacade',
 ```
 
 Publish resource:
