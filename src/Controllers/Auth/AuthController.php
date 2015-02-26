@@ -33,7 +33,7 @@ class AuthController extends Controller
         $this->auth = $auth;
         $this->registrar = $registrar;
 
-        $this->middleware('ap.guest', ['except' => ['getLogout', 'getPerm']]);
+        $this->middleware('ap.auth', ['except' => ['getLogin', 'postLogin']]);
     }
 
     public function getRegister()
@@ -46,18 +46,13 @@ class AuthController extends Controller
         return view('adminPanel::auth.login');
     }
 
-    public function getPerm()
-    {
-        return "Not access";
-    }
-
     public function redirectPath()
     {
         if (property_exists($this, 'redirectPath')) {
             return $this->redirectPath;
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/admin';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : route('admin.home');
     }
 
     /**
@@ -67,7 +62,7 @@ class AuthController extends Controller
      */
     public function loginPath()
     {
-        return property_exists($this, 'loginPath') ? $this->loginPath : '/admin/auth/login';
+        return property_exists($this, 'loginPath') ? $this->loginPath : route('admin.login');
     }
 
 }

@@ -18,7 +18,7 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/admin/auth/register">
+					<form class="form-horizontal" role="form" method="POST" action="{!! route('admin.register') !!}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">

@@ -2,6 +2,7 @@
 
 return [
 
-    'routePrefix' => 'admin'
+    'routePrefix' => 'qwerty',
+    'ap_permission' => 'ap_access',
 
 ];

@@ -44,7 +44,7 @@ class Permission implements Middleware{
             }
             else
             {
-                return redirect()->action('Auth\AuthController@getLogin');
+                return redirect()->route('admin.login');
             }
         }
 

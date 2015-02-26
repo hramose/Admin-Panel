@@ -9,6 +9,7 @@
 namespace Cinject\AdminPanel\Providers;
 
 
+use Cinject\AdminPanel\Console\Commands\Install;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,6 +27,8 @@ class AdminPanelServiceProvider extends ServiceProvider
 
     public function boot(Router $router)
     {
+        $this->commands(Install::class);
+
         $this->setRootControllerNamespace();
 
         foreach ($this->routeMiddleware as $key => $middleware) {
@@ -33,9 +36,14 @@ class AdminPanelServiceProvider extends ServiceProvider
         }
 
         $router->group(['namespace' => $this->namespace, 'prefix' => config('adminPanel.routePrefix')], function ($router) {
-            $router->controller('auth', 'Auth\AuthController');
 
-            $router->group(['middleware' => 'ap.permission', 'permission' => 'ap'], function () {
+            $router->controller('auth', 'Auth\AuthController', [
+                'getRegister'   => 'admin.register',
+                'getLogin'      => 'admin.login',
+                'getLogout'     => 'admin.logout',
+            ]);
+
+            $router->group(['middleware' => 'ap.permission', 'permission' => config('adminPanel.ap_permission')], function () {
                 require __DIR__ . '/../routes.php';
             });
         });
@@ -50,12 +58,21 @@ class AdminPanelServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../resources/assets' => base_path('resources/adminAssets')
         ], 'assets');
+
+        $this->publishes([
+            __DIR__ . '/../../migrations' => base_path('database/migrations')
+        ], 'migrate');
     }
 
     public function register()
     {
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/config.php', 'adminPanel'
+        );
+
+        $this->app->bind(
+            'Illuminate\Contracts\Auth\Registrar',
+            'Cinject\AdminPanel\Services\Registrar'
         );
     }
 }
