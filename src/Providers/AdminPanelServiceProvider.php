@@ -29,8 +29,6 @@ class AdminPanelServiceProvider extends ServiceProvider
     {
         $this->commands(Install::class);
 
-        $this->setRootControllerNamespace();
-
         foreach ($this->routeMiddleware as $key => $middleware) {
             $router->middleware($key, $middleware);
         }
