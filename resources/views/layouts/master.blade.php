@@ -25,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('admin.home') }}">{{$siteName or 'Admin Panel'}}</a>
+            <a class="navbar-brand" href="{{ route('home') }}">{{$siteName or 'Admin Panel'}}</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -50,6 +50,16 @@
     </div>
 </nav>
 
+@if(Session::has('message'))
+    <div class="status-message">
+        <div class="col-lg-12">
+            <div class="alert alert-success">
+                {{Session::get('message')}}
+            </div>
+        </div>
+    </div>
+@endif
+
 @yield('content')
 
 <!-- /.container -->
@@ -57,6 +67,34 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script>
+
+    function updateContainer() {
+        $.get(window.location.href, function (data) {
+            var container = '.table';
+
+            $(container).html($(data).find(container).html());
+        });
+    }
+
+    $('table').on('click', 'a[data-method]', function(){
+
+        if (confirm("Delete item?")) {
+
+            var method = $(this).data('method');
+
+            $.post($(this).attr('href'), {
+                "_method": method,
+                "_token": "<?php echo csrf_token() ?>"
+            }, function (response) {
+                updateContainer();
+            });
+        }
+
+        return false;
+    });
+</script>
 
 </body>
 </html>
