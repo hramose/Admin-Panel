@@ -1,8 +1,8 @@
 <?php
 
 return [
-
-    'routePrefix' => 'qwerty',
+    'subDomain' => false,
+    'routePrefix' => 'admin',
     'ap_permission' => 'ap_access',
 
 ];

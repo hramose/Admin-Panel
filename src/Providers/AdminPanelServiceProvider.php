@@ -33,16 +33,27 @@ class AdminPanelServiceProvider extends ServiceProvider
             $router->middleware($key, $middleware);
         }
 
-        $router->group(['namespace' => $this->namespace, 'prefix' => config('adminPanel.routePrefix')], function ($router) {
+        $groupOptions = ['namespace' => $this->namespace];
+
+        if (config('adminPanel.subDomain'))
+            $groupOptions['domain'] = config('adminPanel.routePrefix') . '.' . preg_replace("/^(.*?)\.(.*)$/", "$2", \Request::server('SERVER_NAME'));
+        else
+            $groupOptions['prefix'] = config('adminPanel.routePrefix');
+
+        $router->group($groupOptions, function (Router $router) {
 
             $router->controller('auth', 'Auth\AuthController', [
-                'getRegister'   => 'admin.register',
-                'getLogin'      => 'admin.login',
-                'getLogout'     => 'admin.logout',
+                'getRegister' => 'admin.register',
+                'getLogin' => 'admin.login',
+                'getLogout' => 'admin.logout',
             ]);
 
-            $router->group(['middleware' => 'ap.permission', 'permission' => config('adminPanel.ap_permission')], function () {
-                require __DIR__ . '/../routes.php';
+            $router->group(['middleware' => 'ap.permission', 'permission' => config('adminPanel.ap_permission')], function (Router $route) {
+
+                $route->get('/', ['as' => 'admin.home', function () {
+                    return view('adminPanel::hello');
+                }]);
+
             });
         });
 
