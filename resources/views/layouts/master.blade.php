@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ $siteName or 'Admin Panel' }}{{ isset($title) ? ' | ' . $title : null }}</title>
 
-    <link rel="stylesheet" href="{{asset('packages/adminPanel/app.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('packages/adminPanel/app.css') }}"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,25 +18,24 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('home') }}">{{$siteName or 'Admin Panel'}}</a>
+            <a class="navbar-brand" href="{{ route('home') }}">{{ $siteName or 'Admin Panel' }}</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                {!!$leftMenu or null!!}
+                {!! $leftMenu or null !!}
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
                     <li><a href="{{ route('admin.login') }}">Авторизация</a></li>
                 @else
-                    <li><a href="{{ route('admin.register') }}">Регистрация пользователя</a></li>
+                    <li><a href="{{ route('admin.user.index') }}">Пользователи</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -54,7 +53,7 @@
     <div class="status-message">
         <div class="col-lg-12">
             <div class="alert alert-success">
-                {{Session::get('message')}}
+                {{ Session::get('message') }}
             </div>
         </div>
     </div>

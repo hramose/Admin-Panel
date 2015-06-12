@@ -12,6 +12,7 @@
     }
   },
   "require": {
-    "zizaco/entrust": "dev-laravel-5"
+    "zizaco/entrust": "dev-laravel-5",
+    "nayjest/grids": "dev-master"
   }
 }
