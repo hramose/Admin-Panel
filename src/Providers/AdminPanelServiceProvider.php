@@ -11,7 +11,7 @@ namespace Cinject\AdminPanel\Providers;
 
 use Cinject\AdminPanel\Console\Commands\Install;
 use Illuminate\Routing\Router;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class AdminPanelServiceProvider extends ServiceProvider
 {
