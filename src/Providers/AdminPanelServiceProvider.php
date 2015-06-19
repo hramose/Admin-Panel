@@ -19,9 +19,9 @@ class AdminPanelServiceProvider extends ServiceProvider
     protected $namespace = 'Cinject\AdminPanel\Controllers';
 
     protected $routeMiddleware = [
-        'ap.auth' => 'Cinject\AdminPanel\Middleware\Authenticate',
-        'ap.guest' => 'Cinject\AdminPanel\Middleware\RedirectIfAuthenticated',
-        'ap.permission' => 'Cinject\AdminPanel\Middleware\Permission',
+        'ap.auth' => \Cinject\AdminPanel\Middleware\Authenticate::class,
+        'ap.guest' => \Cinject\AdminPanel\Middleware\RedirectIfAuthenticated::class,
+        'ap.permission' => \Cinject\AdminPanel\Middleware\Permission::class,
     ];
 
 

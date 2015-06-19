@@ -34,6 +34,7 @@ class AuthController extends Controller
         $this->registrar = $registrar;
 
         $this->middleware('ap.auth', ['except' => ['getLogin', 'postLogin']]);
+        $this->middleware('ap.guest', ['only' => ['getLogin', 'postLogin']]);
     }
 
     public function getRegister()
