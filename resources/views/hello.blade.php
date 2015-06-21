@@ -9,10 +9,4 @@
 
     </div>
 
-    <?php $__env->startSection('test_content'); ?>
-
-    <div class="item">Test</div>
-
-    <?php $__env->stopSection(); ?>
-
 @stop

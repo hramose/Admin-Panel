@@ -60,7 +60,7 @@ class UserController extends BaseController
                     )
                 )
                 ->setColumns([
-                    (new FieldConfig('name', 'Название'))
+                    (new FieldConfig('name', 'Логин'))
                         ->setCallback(function ($value, $vl) {
                             return link_to_route('admin.user.edit', $value, $vl->getSrc());
                         })
