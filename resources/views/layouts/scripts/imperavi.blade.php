@@ -6,12 +6,16 @@
 <script src="{{ asset('packages/adminPanel/imperavi/plugins/imagemanager/imagemanager.js') }}"></script>
 <script type="text/javascript">
     $(function () {
+
         $('textarea').redactor({
             lang: 'ru',
             focus: true,
-            imageUpload: '/upload.php',
-            imageManagerJson: '/images/images.json',
-            plugins: ['imagemanager']
+            imageUpload: '/ajax/upload-image',
+            imageManagerJson: '/ajax/load-images',
+            plugins: ['imagemanager'],
+            uploadImageFields: {
+                '_token': '<?= csrf_token() ?>'
+            }
         });
     });
 </script>

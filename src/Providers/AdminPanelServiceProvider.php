@@ -54,6 +54,8 @@ class AdminPanelServiceProvider extends ServiceProvider
                     return view('adminPanel::hello');
                 }]);
 
+                $route->controller('ajax', 'AjaxController');
+
                 $route->resource('user', 'UserController', ['as' => 'admin']);
 
             });
