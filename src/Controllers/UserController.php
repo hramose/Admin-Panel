@@ -83,7 +83,13 @@ class UserController extends BaseController
                         ),
                     (new FieldConfig('roles', 'Роли'))
                         ->setCallback(function ($value) {
-                            return implode(', ', $value->lists('display_name'));
+
+                            $list = $value->lists('display_name');
+
+                            if(version_compare(app()->version(), '5.1.0', '>='))
+                                $list = $list->all();
+
+                            return implode(', ', $list);
                         })
                     ,
                 ])
