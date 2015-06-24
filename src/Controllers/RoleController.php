@@ -8,10 +8,9 @@
 
 namespace Cinject\AdminPanel\Controllers;
 
-use App\Http\Requests\RoleRequest;
+use Cinject\AdminPanel\Requests\RoleRequest;
 use Illuminate\Http\Request;
 use Nayjest\Grids\FilterConfig;
-use Nayjest\Grids\Grids;
 
 class RoleController extends BaseController{
 

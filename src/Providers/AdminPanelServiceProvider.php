@@ -55,10 +55,10 @@ class AdminPanelServiceProvider extends ServiceProvider
 
                 $route->controller('ajax', 'AjaxController');
 
-                $route->resource('user', 'UserController');
-
                 $route->model('role', config('entrust.role'));
-                $route->resource('role', 'RoleController');
+                $route->resource('user', 'UserController', ['as' => 'admin']);
+
+                $route->resource('role', 'RoleController', ['as' => 'admin']);
 
             });
         });
