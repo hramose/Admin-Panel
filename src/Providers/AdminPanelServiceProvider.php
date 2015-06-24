@@ -8,7 +8,6 @@
 
 namespace Cinject\AdminPanel\Providers;
 
-
 use Cinject\AdminPanel\Console\Commands\Install;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -56,7 +55,10 @@ class AdminPanelServiceProvider extends ServiceProvider
 
                 $route->controller('ajax', 'AjaxController');
 
-                $route->resource('user', 'UserController', ['as' => 'admin']);
+                $route->resource('user', 'UserController');
+
+                $route->model('role', config('entrust.role'));
+                $route->resource('role', 'RoleController');
 
             });
         });
