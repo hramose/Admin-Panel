@@ -13,8 +13,9 @@ Providers:
 
 ```PHP
 
-'Zizaco\Entrust\EntrustServiceProvider',
-'Cinject\AdminPanel\Providers\AdminPanelServiceProvider',
+Zizaco\Entrust\EntrustServiceProvider::class,
+Nayjest\Grids\ServiceProvider::class,
+Cinject\AdminPanel\Providers\AdminPanelServiceProvider::class,
 ```
 
 Aliases:
