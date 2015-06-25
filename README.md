@@ -5,14 +5,12 @@
 Composer:
 
 ```json
-
 "cinject/admin-panel": "dev-master"
 ```
 
 Providers:
 
 ```PHP
-
 Zizaco\Entrust\EntrustServiceProvider::class,
 Nayjest\Grids\ServiceProvider::class,
 Cinject\AdminPanel\Providers\AdminPanelServiceProvider::class,
@@ -21,7 +19,7 @@ Cinject\AdminPanel\Providers\AdminPanelServiceProvider::class,
 Aliases:
 
 ```PHP
-'Entrust'  =>  'Zizaco\Entrust\EntrustFacade',
+'Entrust'   =>  Zizaco\Entrust\EntrustFacade::class,
 ```
 
 Publish resource:
