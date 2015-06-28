@@ -1,7 +1,8 @@
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -15,19 +16,27 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+
+                {!! $rightMenu or null !!}
+
                 @if (Auth::guest())
                     <li><a href="{{ route('admin.login') }}">Авторизация</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Управление пользователями<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Управление
+                            пользователями<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('admin.user.index') }}">Пользователи</a></li>
                             <li><a href="{{ route('admin.role.index') }}">Роли</a></li>
                             <li><a href="{{ route('admin.permission.index') }}">Права</a></li>
                         </ul>
                     </li>
+                    @if(Route::has('home'))
+                        <li><a href="{!! route('home') !!}">Переход на сайт</a></li>
+                    @endif
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('admin.logout') }}">Выход</a></li>
                         </ul>
