@@ -18,17 +18,11 @@
 
 @include('adminPanel::layouts.partials.nav')
 
-@if(Session::has('message'))
-    <div class="status-message">
-        <div class="col-lg-12">
-            <div class="alert alert-success">
-                {{ Session::get('message') }}
-            </div>
-        </div>
-    </div>
-@endif
-
 <div class="container">
+    @if(Session::has('message'))
+        @include('adminPanel::partials.messages')
+    @endif
+
     @yield('content')
 </div>
 

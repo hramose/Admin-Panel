@@ -8,6 +8,8 @@
 
 @section('content')
 
+    <h1>Роли</h1>
+
     {!! $grid !!}
 
 @stop

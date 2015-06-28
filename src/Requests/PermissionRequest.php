@@ -2,10 +2,9 @@
 
 namespace Cinject\AdminPanel\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest as Request;
 
-class RoleRequest extends Request
+class PermissionRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +24,14 @@ class RoleRequest extends Request
     public function rules()
     {
         $rules = [
-            'name'=>'required|unique:'.config('entrust.roles_table'),
+            'name'=>'required|unique:'.config('entrust.permissions_table'),
             'display_name'=>'required|max:255',
             'description'=>'string',
         ];
 
         switch($this->method()) {
             case 'PATCH':
-                $rules['name'] = 'required|unique:'.config('entrust.roles_table').',name,'.$this->role->id;
+                $rules['name'] = 'required|unique:'.config('entrust.permissions_table').',name,'.$this->permission->id;
                 break;
         }
 

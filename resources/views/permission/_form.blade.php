@@ -16,10 +16,10 @@
     {!! $errors->first('description','<p class="help-block">:message</p>') !!}
 </div>
 
-<div class="form-group @if($errors->has('users')) has-error @endif">
-    {!! Form::label('users') !!}
-    {!! Form::select('users[]', $users, isset($user_list) ? $user_list : null, ['class'=>'form-control','multiple']) !!}
-    {!! $errors->first('users','<p class="help-block">:message</p>') !!}
+<div class="form-group @if($errors->has('roles')) has-error @endif">
+    {!! Form::label('roles') !!}
+    {!! Form::select('roles[]', $roles, isset($role_list) ? $role_list : null, ['class'=>'form-control', 'multiple']) !!}
+    {!! $errors->first('roles','<p class="help-block">:message</p>') !!}
 </div>
 
 <div class="form-group">

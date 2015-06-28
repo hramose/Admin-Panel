@@ -12,7 +12,7 @@
 
             <div class="panel panel-default">
             	  <div class="panel-heading">
-            			<h3 class="panel-title">Создать роль</h3>
+            			<h3 class="panel-title">Создание роли</h3>
             	  </div>
             	  <div class="panel-body">
                       {!! Form::open(['method'=>'POST', 'route'=>'admin.role.store']) !!}
